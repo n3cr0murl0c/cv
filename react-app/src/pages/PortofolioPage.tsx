@@ -34,7 +34,7 @@ const Portfolio = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -121,7 +121,7 @@ const Portfolio = () => {
     },
   ];
 
-  const SkillBar = ({ name, level }) => (
+  const SkillBar = ({ name, level }: { name: string; level: number }) => (
     <div className="mb-4">
       <div className="flex justify-between mb-1">
         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -140,7 +140,13 @@ const Portfolio = () => {
     </div>
   );
 
-  const ExperienceCard = ({ experience, index }) => (
+  const ExperienceCard = ({
+    experience,
+    index,
+  }: {
+    experience: any;
+    index: number;
+  }) => (
     <div
       className={`mb-8 flex ${
         index % 2 === 0 ? "flex-row" : "flex-row-reverse"
@@ -174,7 +180,7 @@ const Portfolio = () => {
           {experience.description}
         </p>
         <ul className="space-y-2 mb-4">
-          {experience.achievements.map((achievement, i) => (
+          {experience.achievements.map((achievement: string, i: number) => (
             <li
               key={i}
               className="flex items-start"
@@ -187,7 +193,7 @@ const Portfolio = () => {
           ))}
         </ul>
         <div className="flex flex-wrap gap-2">
-          {experience.technologies.map((tech, i) => (
+          {experience.technologies.map((tech: string, i: number) => (
             <span
               key={i}
               className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs font-medium"
