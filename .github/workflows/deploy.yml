@@ -38,6 +38,7 @@ jobs:
 
       - name: Build with Vite
         run: bun run build
+        working-directory: ./react-app
 
       - name: Copy index.html to root
         run: |
