@@ -43,7 +43,7 @@ jobs:
       - name: Copy index.html to root
         run: |
           # Copiar el archivo compilado al root del repo
-          cp dist/index.html ./index.html
+          cp ./react-app/dist/index.html ./index.html
 
           # Copiar assets si existen
           if [ -d "dist/assets" ]; then
