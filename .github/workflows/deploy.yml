@@ -34,6 +34,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install -g bun && bun install
+        working-directory: ./react-app
 
       - name: Build with Vite
         run: bun run build
