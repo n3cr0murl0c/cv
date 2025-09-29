@@ -22,10 +22,6 @@ concurrency:
 env:
   NODE_ENV: "production"
 
-defaults:
-  run:
-    working-directory: ./react-app
-
 jobs:
   # Job de build
   build:
@@ -42,9 +38,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install -g bun && bun install
+        working-directory: ./react-app
 
       - name: Build with Vite
         run: bun run build
+        working-directory: ./react-app
 
       - name: Copy index.html to root
         run: |
@@ -53,6 +51,7 @@ jobs:
 
           # Listar archivos para verificar
           ls -la
+        working-directory: ./
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
