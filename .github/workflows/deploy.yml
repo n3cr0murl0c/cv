@@ -40,27 +40,16 @@ jobs:
         run: bun run build
         working-directory: ./react-app
 
-      - name: Copy index.html to root
-        run: |
-          # Copiar el archivo compilado al root del repo
-          cp ./react-app/dist/index.html ./index.html
-
-          # Copiar assets si existen
-          if [ -d "dist/assets" ]; then
-            cp -r dist/assets ./assets
-          fi
-
-          # Listar archivos para verificar
-          ls -la
-
       - name: Setup Pages
-        uses: actions/configure-pages@v4
-
+        uses: actions/configure-pages@v5
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          # Upload desde el directorio root que contiene index.html
-          path: "."
+          # Upload  index.html
+          path: "./react-app/dist/index.html"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
 
   # Job de deployment
   deploy:
