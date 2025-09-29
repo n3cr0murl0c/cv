@@ -33,31 +33,37 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "24.9.0"
+          node-version: "18"
           cache: "npm"
+          cache-dependency-path: "./react-app/package-lock.json"
 
       - name: Install dependencies
-        run: npm install -g bun && bun install
+        run: npm ci
         working-directory: ./react-app
 
       - name: Build with Vite
-        run: bun run build
+        run: npm run build
         working-directory: ./react-app
 
-      - name: Copy index.html to root
+      - name: Copy files to root
         run: |
           # Copiar el archivo compilado al root del repo
-          cp dist/index.html ./index.html
+          cp react-app/dist/index.html ./index.html
+
+          # Copiar assets si existen
+          if [ -d "react-app/dist/assets" ]; then
+            mkdir -p ./assets
+            cp -r react-app/dist/assets/* ./assets/
+          fi
 
           # Listar archivos para verificar
           ls -la
-        working-directory: ./
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v2
         with:
           # Upload desde el directorio root que contiene index.html
           path: "."
