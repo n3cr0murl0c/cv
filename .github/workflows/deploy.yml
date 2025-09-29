@@ -37,7 +37,7 @@ jobs:
         run: npm ci
 
       - name: Build with Vite
-        run: npm run build
+        run: npm install -g bun && bun run build
 
       - name: Copy index.html to root
         run: |
